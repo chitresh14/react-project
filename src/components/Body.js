@@ -1,6 +1,7 @@
 import RestaurantCard from './RestaurantCard';
 import { useEffect, useState } from 'react';
 import Shimmer from './Shimmer';
+import { Link } from 'react-router-dom';
 
 const Body = () => {
   // Local state variable
@@ -67,9 +68,17 @@ const Body = () => {
       </div>
       <div className="res-container">
         {filteredRestaurants.map((rest) => {
-          return <RestaurantCard resData={rest} key={rest.id} />;
+          return (
+            <Link key={rest.id} to={'/restaurants/' + rest.id}>
+              <RestaurantCard resData={rest} />
+            </Link>
+          );
         })}
       </div>
+      <iframe
+        className="react-life"
+        src="https://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/"
+      ></iframe>
     </div>
   );
 };

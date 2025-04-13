@@ -70,3 +70,13 @@
 .filter {
   display: flex;
 }
+
+.user-card{
+  padding: 10px;
+  border: 1px solid black;
+}
+
+.react-life {
+  width: 800px;
+  height: 800px;
+}
