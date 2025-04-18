@@ -11,11 +11,11 @@
 - - Search
 - - RestaurantContainer
 - - Restaurant Card
--      - Img
--      - Name of restaurant, cuisine, Star Rating delivery time
+-      Img
+-      Name of restaurant, cuisine, Star Rating delivery time
 - Footer
-- - Copyright
-- - Links
-- - Address
-- - Contact
-    \*/
+    - Copyright
+    - Links
+    - Address
+    - Contact
+\*/
