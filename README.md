@@ -1,8 +1,7 @@
 # React introduction 🚀
 
-# Food Application
+## Food Application
 
-/\*\*
 
 - Header
     - Logo
@@ -19,4 +18,3 @@
     - Address
     - Contact
 
-\*/
