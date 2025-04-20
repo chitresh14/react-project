@@ -6,7 +6,7 @@ const RestaurantCategory = ({
   handleCatergoryClick,
   isCategoryItemsVisible,
 }) => {
-  const { categoryId, itemCards, title } = categoryData;
+  const { itemCards, title } = categoryData;
 
   return (
     <div>
@@ -21,11 +21,9 @@ const RestaurantCategory = ({
           </span>
           <span>🔽</span>
         </div>
-        :::{showItems.toString()}
+
         {/* Accordion Body */}
-        {showItems && isCategoryItemsVisible && (
-          <ItemList categoryItems={itemCards} />
-        )}
+        {showItems && <ItemList categoryItems={itemCards} />}
       </div>
     </div>
   );

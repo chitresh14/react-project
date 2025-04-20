@@ -31,12 +31,14 @@ const RestaurantMenu = () => {
         item?.card?.card?.['@type'] ===
         'type.googleapis.com/swiggy.presentation.food.v2.ItemCategory'
     );
+
   const handleClick = (index) => {
-    console.log('index::', index);
-    setIsItemVisible(!isItemVisible);
+    if (showIndex != index || showIndex == null) {
+      setIsItemVisible(true);
+    } else {
+      setIsItemVisible(!isItemVisible);
+    }
     setShowIndex(index);
-    console.log('isItemVisible:::', isItemVisible);
-    console.log('showIndex::', showIndex);
   };
 
   return (
@@ -50,15 +52,14 @@ const RestaurantMenu = () => {
         return (
           // controlled component
           <div key={category?.card?.card.title}>
-            isItemVisible:: {isItemVisible.toString()}
-            showIndex:: {showIndex}
-            <RestaurantCategory
-              key={category?.card?.card.categoryId}
-              categoryData={category?.card?.card}
-              showItems={index === showIndex ? true : false}
-              isCategoryItemsVisible={isItemVisible}
-              handleCatergoryClick={() => handleClick(index)}
-            />
+            <div key={category?.card?.card.title}>
+              <RestaurantCategory
+                key={category?.card?.card.categoryId}
+                categoryData={category?.card?.card}
+                showItems={index === showIndex && isItemVisible ? true : false}
+                handleCatergoryClick={() => handleClick(index)}
+              />
+            </div>
           </div>
         );
       })}
