@@ -1,8 +1,9 @@
 import RestaurantCard, { withPromotedLabel } from './RestaurantCard';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import Shimmer from './Shimmer';
 import { Link } from 'react-router-dom';
 import useOnlineStatus from '../utils/hooks/useOnlineStatus';
+import UserContext from '../utils/contexts/UserContext';
 
 const Body = () => {
   // Local state variable
@@ -14,7 +15,7 @@ const Body = () => {
   useEffect(() => {
     fetchData(); // call after the component render
   }, []);
-
+  const { loggedInUser, setUserName } = useContext(UserContext);
   const fetchData = async () => {
     const data = await fetch(
       'https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9715987&lng=77.5945627&collection=83639&tags=layout_CCS_Biryani&sortBy=&filters=&type=rcv2&offset=0&page_type=null'
@@ -77,6 +78,14 @@ const Body = () => {
           >
             Top Rated Restaurants
           </button>
+          <div className="items-center mx-2">
+            <label>User Name</label>
+            <input
+              className="p-2 border border-solid"
+              value={loggedInUser}
+              onChange={(e) => setUserName(e.target.value)}
+            ></input>
+          </div>
         </div>
       </div>
       <div className="flex flex-wrap">
