@@ -93,7 +93,7 @@ const Body = () => {
         })}
       </div>
       <iframe
-        className="react-life"
+        className="react-life w-full"
         src="https://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/"
       ></iframe>
     </div>

@@ -1,10 +1,13 @@
 import Shimmer from './Shimmer';
 import { useParams } from 'react-router-dom';
 import useRestaurantMenu from '../utils/hooks/useRestaurantMenu';
+import RestaurantCategory from './RestaurantCategory';
+import { useState } from 'react';
 
 const RestaurantMenu = () => {
   const { resId } = useParams();
   const resInfo = useRestaurantMenu(resId);
+  // const [isShowItem, setIsShowItem] = useState(false);
 
   if (!resInfo) {
     return <Shimmer />;
@@ -21,22 +24,29 @@ const RestaurantMenu = () => {
   const { itemCards } =
     resInfo?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[4]?.card?.card;
 
+  const itemCatergories =
+    resInfo?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards?.filter(
+      (item) =>
+        item?.card?.card?.['@type'] ===
+        'type.googleapis.com/swiggy.presentation.food.v2.ItemCategory'
+    );
+
   return (
-    <div className="menu">
-      <h1>{name}</h1>
-      <p>
+    <div className="text-center">
+      <h1 className="font-bold my-6 text-2xl">{name}</h1>
+      <p className="font-bold text-lg">
         {cuisines.join(', ')} - {costForTwoMessage}
       </p>
-      <h2>Menu</h2>
-      <ul>
-        {itemCards.map((item) => {
-          return (
-            <li key={item?.card?.info?.id}>
-              {item?.card?.info?.name} - {item?.card?.info?.price / 100} &#8377;
-            </li>
-          );
-        })}
-      </ul>
+      {/* We want categories with accordian */}
+      {itemCatergories.map((category, index) => {
+        return (
+          // controlled component
+          <RestaurantCategory
+            key={category?.card?.card.categoryId}
+            categoryData={category?.card?.card}
+          />
+        );
+      })}
     </div>
   );
 };

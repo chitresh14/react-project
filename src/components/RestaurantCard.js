@@ -1,9 +1,5 @@
 import { CDN_URL } from '../utils/constants';
 
-// const styleCard = {
-//   backgroundColor: '#f0f0f0',
-// };
-
 const RestaurantCard = (props) => {
   const { resData } = props;
   const { cloudinaryImageId, name, cuisines, avgRating, costForTwo, sla } =
@@ -11,10 +7,7 @@ const RestaurantCard = (props) => {
   const { deliveryTime } = sla;
 
   return (
-    <div
-      className="m-4 p-4 w-[250px] h-[425px] rounded-lg bg-gray-100 hover:bg-gray-200"
-      // style={styleCard}
-    >
+    <div className="m-4 p-4 w-[250px] h-[425px] rounded-lg bg-gray-100 hover:bg-gray-200">
       <img
         className="rounded-lg w-[218px] h-[170px]"
         alt="res-logo"
