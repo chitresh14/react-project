@@ -7,7 +7,8 @@ import { useState } from 'react';
 const RestaurantMenu = () => {
   const { resId } = useParams();
   const resInfo = useRestaurantMenu(resId);
-  // const [isShowItem, setIsShowItem] = useState(false);
+  const [isItemVisible, setIsItemVisible] = useState(false);
+  const [showIndex, setShowIndex] = useState(null);
 
   if (!resInfo) {
     return <Shimmer />;
@@ -30,6 +31,13 @@ const RestaurantMenu = () => {
         item?.card?.card?.['@type'] ===
         'type.googleapis.com/swiggy.presentation.food.v2.ItemCategory'
     );
+  const handleClick = (index) => {
+    console.log('index::', index);
+    setIsItemVisible(!isItemVisible);
+    setShowIndex(index);
+    console.log('isItemVisible:::', isItemVisible);
+    console.log('showIndex::', showIndex);
+  };
 
   return (
     <div className="text-center">
@@ -41,10 +49,17 @@ const RestaurantMenu = () => {
       {itemCatergories.map((category, index) => {
         return (
           // controlled component
-          <RestaurantCategory
-            key={category?.card?.card.categoryId}
-            categoryData={category?.card?.card}
-          />
+          <div key={category?.card?.card.title}>
+            isItemVisible:: {isItemVisible.toString()}
+            showIndex:: {showIndex}
+            <RestaurantCategory
+              key={category?.card?.card.categoryId}
+              categoryData={category?.card?.card}
+              showItems={index === showIndex ? true : false}
+              isCategoryItemsVisible={isItemVisible}
+              handleCatergoryClick={() => handleClick(index)}
+            />
+          </div>
         );
       })}
     </div>
