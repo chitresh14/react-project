@@ -16,6 +16,7 @@ const Body = () => {
     fetchData(); // call after the component render
   }, []);
   const { loggedInUser, setUserName } = useContext(UserContext);
+
   const fetchData = async () => {
     const data = await fetch(
       'https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9715987&lng=77.5945627&collection=83639&tags=layout_CCS_Biryani&sortBy=&filters=&type=rcv2&offset=0&page_type=null'
@@ -46,6 +47,7 @@ const Body = () => {
         <div className="search p-4 m-4">
           <input
             type="text"
+            data-testid="searchInput"
             className="border border-solid border-black"
             value={searchText}
             onChange={(e) => {
@@ -68,12 +70,12 @@ const Body = () => {
         </div>
         <div className="flex items-center">
           <button
-            className="px-4 py-2 bg-gray-100 rounded-lg"
+            className="px-4 py-2 bg-gray-100 rounded-lg cursor-pointer"
             onClick={() => {
               const filteredList = listOfRestaurants.filter(
-                (res) => res.avgRating > 4.5
+                (res) => res.avgRating >= 4.5
               );
-              setListOfRestaurants(filteredList);
+              setFilteredRestaurants(filteredList);
             }}
           >
             Top Rated Restaurants
